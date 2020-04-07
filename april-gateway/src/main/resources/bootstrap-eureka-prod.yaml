@@ -1,0 +1,9 @@
+server:
+  port: 8888
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${eureka1.host:localhost}:${eureka1.port:8761}/eureka,http://${eureka2.host:localhost}:${eureka2.port:8761}/eureka,http://${eureka3.host:localhost}:${eureka3.port:8761}/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: gateway

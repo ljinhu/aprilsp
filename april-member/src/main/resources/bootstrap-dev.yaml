@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    username: ${db.username:root}
+    password: ${db.password:password}
+    url: jdbc:mysql://${db.host:192.168.56.10}:${db.port:3307}/${db.name:gulimall_ums}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.jdbc.Driver
+  application:
+    name: gulimall-member
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+server:
+  port: 8000

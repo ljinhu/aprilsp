@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.ip:127.0.0.1}:${nacos.port:8848}
+      config:
+        server-addr: ${nacos.ip:127.0.0.1}:${nacos.port:8848}
+server:
+  port: 88
