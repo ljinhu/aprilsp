@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.ip:127.0.0.1}:${nacos.port:8848}
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    data-username: ${db.userName:r12}
+    data-password: ${db.password:root123}
+    url: jdbc:mysql://${db.url:127.0.0.1}:${db.port:3306}/gulimall_oms
+server:
+  port: ${server.port:9000}

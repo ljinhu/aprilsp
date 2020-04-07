@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: product
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.ip:127.0.0.1}:${nacos.port:8848}
+      config:
+        server-addr: ${nacos.host:localhost}:${nacos.port:8848}
+        file-extension: yaml
+        namespace:
+        group:
