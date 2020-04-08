@@ -1,4 +1,4 @@
-package com.atguigu.gulimall.gateway.config;
+package com.jimbolix.april.gateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,7 +7,7 @@ import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 @Configuration
-public class GulimallCorsConfiguration {
+public class AprilCorsConfiguration {
 
     @Bean
     public CorsWebFilter corsWebFilter() {

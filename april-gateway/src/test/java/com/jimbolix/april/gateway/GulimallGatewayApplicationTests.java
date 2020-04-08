@@ -1,4 +1,4 @@
-package com.atguigu.gulimall.gateway;
+package com.jimbolix.april.gateway;
 
 
 import org.junit.Test;
