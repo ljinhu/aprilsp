@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.atguigu.gulimall.product.entity.SpuInfoDescEntity;
 import com.atguigu.gulimall.product.service.SpuInfoDescService;
-import com.atguigu.common.utils.PageUtils;
-import com.atguigu.common.utils.R;
+import com.jimbolix.april.common.utils.PageUtils;
+import com.jimbolix.april.common.utils.R;
 
 
 /**

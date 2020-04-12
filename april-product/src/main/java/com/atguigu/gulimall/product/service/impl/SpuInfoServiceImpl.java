@@ -1,8 +1,8 @@
 package com.atguigu.gulimall.product.service.impl;
 
-import com.atguigu.common.to.SkuReductionTo;
-import com.atguigu.common.to.SpuBoundTo;
-import com.atguigu.common.utils.R;
+import com.jimbolix.april.common.to.SkuReductionTo;
+import com.jimbolix.april.common.to.SpuBoundTo;
+import com.jimbolix.april.common.utils.R;
 import com.atguigu.gulimall.product.entity.*;
 import com.atguigu.gulimall.product.feign.CouponFeignService;
 import com.atguigu.gulimall.product.service.*;
@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.atguigu.common.utils.PageUtils;
-import com.atguigu.common.utils.Query;
+import com.jimbolix.april.common.utils.PageUtils;
+import com.jimbolix.april.common.utils.Query;
 
 import com.atguigu.gulimall.product.dao.SpuInfoDao;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,7 +1,7 @@
 package com.atguigu.gulimall.coupon.service.impl;
 
-import com.atguigu.common.to.MemberPrice;
-import com.atguigu.common.to.SkuReductionTo;
+import com.jimbolix.april.common.to.MemberPrice;
+import com.jimbolix.april.common.to.SkuReductionTo;
 import com.atguigu.gulimall.coupon.entity.MemberPriceEntity;
 import com.atguigu.gulimall.coupon.entity.SkuLadderEntity;
 import com.atguigu.gulimall.coupon.service.MemberPriceService;
@@ -18,8 +18,8 @@ import java.util.stream.Collectors;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.atguigu.common.utils.PageUtils;
-import com.atguigu.common.utils.Query;
+import com.jimbolix.april.common.utils.PageUtils;
+import com.jimbolix.april.common.utils.Query;
 
 import com.atguigu.gulimall.coupon.dao.SkuFullReductionDao;
 import com.atguigu.gulimall.coupon.entity.SkuFullReductionEntity;

@@ -1,9 +1,9 @@
 package com.atguigu.gulimall.product.entity;
 
-import com.atguigu.common.valid.AddGroup;
-import com.atguigu.common.valid.ListValue;
-import com.atguigu.common.valid.UpdateGroup;
-import com.atguigu.common.valid.UpdateStatusGroup;
+import com.jimbolix.april.common.valid.AddGroup;
+import com.jimbolix.april.common.valid.ListValue;
+import com.jimbolix.april.common.valid.UpdateGroup;
+import com.jimbolix.april.common.valid.UpdateStatusGroup;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 

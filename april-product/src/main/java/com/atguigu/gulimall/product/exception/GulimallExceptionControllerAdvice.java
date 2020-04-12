@@ -1,15 +1,12 @@
 package com.atguigu.gulimall.product.exception;
 
-import com.atguigu.common.exception.BizCodeEnume;
-import com.atguigu.common.utils.R;
+import com.jimbolix.april.common.exception.BizCodeEnume;
+import com.jimbolix.april.common.utils.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.Map;

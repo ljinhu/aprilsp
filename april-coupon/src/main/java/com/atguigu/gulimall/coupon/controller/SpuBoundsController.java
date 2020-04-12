@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.atguigu.gulimall.coupon.entity.SpuBoundsEntity;
 import com.atguigu.gulimall.coupon.service.SpuBoundsService;
-import com.atguigu.common.utils.PageUtils;
-import com.atguigu.common.utils.R;
+import com.jimbolix.april.common.utils.PageUtils;
+import com.jimbolix.april.common.utils.R;
 
 
 /**

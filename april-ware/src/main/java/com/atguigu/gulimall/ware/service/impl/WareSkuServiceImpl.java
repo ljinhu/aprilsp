@@ -1,6 +1,6 @@
 package com.atguigu.gulimall.ware.service.impl;
 
-import com.atguigu.common.utils.R;
+import com.jimbolix.april.common.utils.R;
 import com.atguigu.gulimall.ware.feign.ProductFeignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,8 +11,8 @@ import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.atguigu.common.utils.PageUtils;
-import com.atguigu.common.utils.Query;
+import com.jimbolix.april.common.utils.PageUtils;
+import com.jimbolix.april.common.utils.Query;
 
 import com.atguigu.gulimall.ware.dao.WareSkuDao;
 import com.atguigu.gulimall.ware.entity.WareSkuEntity;

@@ -1,8 +1,8 @@
 package com.atguigu.gulimall.coupon.service;
 
-import com.atguigu.common.to.SkuReductionTo;
+import com.jimbolix.april.common.to.SkuReductionTo;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.atguigu.common.utils.PageUtils;
+import com.jimbolix.april.common.utils.PageUtils;
 import com.atguigu.gulimall.coupon.entity.SkuFullReductionEntity;
 
 import java.util.Map;

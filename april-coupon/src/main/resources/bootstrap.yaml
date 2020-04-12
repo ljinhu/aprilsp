@@ -1,6 +1,8 @@
 spring:
   application:
-    name: gulimall-coupon
+    name: april-coupon
+  profiles:
+    active: dev
   cloud:
     nacos:
       discovery:
