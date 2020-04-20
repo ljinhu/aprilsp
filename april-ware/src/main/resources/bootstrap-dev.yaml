@@ -7,7 +7,7 @@ spring:
     url: jdbc:mysql://${db.host:127.0.0.1}:${db.port:3307}/${db.name:april}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.jdbc.Driver
   application:
-    name: gulimall-ware
+    name: april-ware
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss

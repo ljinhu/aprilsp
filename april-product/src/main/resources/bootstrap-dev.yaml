@@ -1,6 +1,6 @@
 spring:
   application:
-    name: product
+    name: april-product
   profiles:
     active: dev
   datasource:
@@ -23,5 +23,5 @@ server:
   port: 10000
 logging:
   level:
-    com.atguigu.gulimall: debug
+    com.jimbolix.april: debug
 

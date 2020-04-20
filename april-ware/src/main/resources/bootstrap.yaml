@@ -9,4 +9,4 @@ spring:
       discovery:
         server-addr: ${nacos.host:127.0.0.1}:${nacos.port:8848}
   application:
-    name: gulimall-ware
+    name: april-ware

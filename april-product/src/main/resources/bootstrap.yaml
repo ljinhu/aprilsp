@@ -2,7 +2,7 @@ spring:
   profiles:
     active: dev
   application:
-    name: product
+    name: april-product
   cloud:
     nacos:
       discovery:
@@ -10,5 +10,3 @@ spring:
       config:
         server-addr: ${nacos.host:localhost}:${nacos.port:8848}
         file-extension: yaml
-        namespace:
-        group:

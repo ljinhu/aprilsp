@@ -8,5 +8,7 @@ package com.jimbolix.april.common.constant;
 public interface MicroServiceItems {
 
     String coupon = "april-coupon";
+
+    String product = "april-product";
 }
 
