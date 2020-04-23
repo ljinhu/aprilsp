@@ -19,6 +19,7 @@
 		<module>renren-fast</module>
 		<module>renren-generator</module>
 		<module>april-common</module>
-	</modules>
+        <module>april-gateway-admin</module>
+    </modules>
 
 </project>

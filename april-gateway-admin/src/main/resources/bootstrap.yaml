@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: april-gateway-admin
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.ip:127.0.0.1}:${nacos.port:8848}
+      config:
+        server-addr: ${nacos.host:localhost}:${nacos.port:8848}
+        file-extension: yaml
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+logging:
+  level:
+    org.spring: debug
