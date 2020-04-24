@@ -3,12 +3,12 @@ package com.jimbolix.april.gateway.admin.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.web.bind.annotation.*;
 
 import com.jimbolix.april.gateway.admin.entity.GatewayRouteEntity;
 import com.jimbolix.april.gateway.admin.service.GatewayRouteService;
@@ -24,16 +24,19 @@ import com.jimbolix.april.common.utils.R;
  * @date 2020-04-23 21:30:04
  */
 @RestController
-@RequestMapping("ware/gatewayroute")
+@RequestMapping("april/gatewayroute")
+@ApiModel("动态网关管理")
 public class GatewayRouteController {
     @Autowired
     private GatewayRouteService gatewayRouteService;
-
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
     /**
      * 列表
      */
-    @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params) {
+    @ApiOperation("分页查询")
+    @PostMapping("/list")
+    public R list(@ApiParam @RequestParam Map<String, Object> params) {
         PageUtils page = gatewayRouteService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -54,9 +57,9 @@ public class GatewayRouteController {
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody GatewayRouteEntity gatewayRoute) {
-            gatewayRouteService.save(gatewayRoute);
-
+    @ApiOperation("网关添加")
+    public R save(@ApiParam @RequestBody GatewayRouteEntity gatewayRoute) {
+            gatewayRouteService.add(gatewayRoute);
         return R.ok();
     }
 

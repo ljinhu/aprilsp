@@ -25,6 +25,6 @@ public interface GatewayRouteService extends IService<GatewayRouteEntity> {
      * @param gatewayRouteEntity
      * @return
      */
-    boolean save(GatewayRouteEntity gatewayRouteEntity);
+    boolean add(GatewayRouteEntity gatewayRouteEntity);
 }
 

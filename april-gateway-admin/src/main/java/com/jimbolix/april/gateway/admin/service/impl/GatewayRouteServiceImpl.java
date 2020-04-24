@@ -1,7 +1,20 @@
 package com.jimbolix.april.gateway.admin.service.impl;
 
+import com.alicp.jetcache.Cache;
+import com.alicp.jetcache.anno.CacheType;
+import com.alicp.jetcache.anno.CreateCache;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jimbolix.april.common.constant.CacheKeysConstant;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.cloud.gateway.filter.FilterDefinition;
+import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
+import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.stereotype.Service;
 
+import java.net.URI;
+import java.util.List;
 import java.util.Map;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -13,10 +26,14 @@ import com.jimbolix.april.common.utils.Query;
 import com.jimbolix.april.gateway.admin.dao.GatewayRouteDao;
 import com.jimbolix.april.gateway.admin.entity.GatewayRouteEntity;
 import com.jimbolix.april.gateway.admin.service.GatewayRouteService;
+import org.springframework.transaction.annotation.Transactional;
 
-
+@Slf4j
 @Service("gatewayRouteService")
 public class GatewayRouteServiceImpl extends ServiceImpl<GatewayRouteDao, GatewayRouteEntity> implements GatewayRouteService {
+
+    @CreateCache(cacheType = CacheType.REMOTE, name = CacheKeysConstant.gateway_routes)
+    private Cache<String, RouteDefinition> gateWayRouteCache;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -24,8 +41,53 @@ public class GatewayRouteServiceImpl extends ServiceImpl<GatewayRouteDao, Gatewa
                 new Query<GatewayRouteEntity>().getPage(params),
                 new QueryWrapper<GatewayRouteEntity>()
         );
-
         return new PageUtils(page);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public boolean add(GatewayRouteEntity gatewayRouteEntity) {
+        RouteDefinition routeDefinition = gatewayRouteConvertToDefinition(gatewayRouteEntity);
+        //放入缓存
+        gateWayRouteCache.PUT(routeDefinition.getId(), routeDefinition);
+        //todo 发送消息
+
+        return this.save(gatewayRouteEntity);
+    }
+
+    /**
+     * 将GatewayRouteEntity转换为Spring cloud gateway 的RouteDefinition
+     * 方便向消息队列中发送消息
+     *
+     * @param gatewayRouteEntity
+     * @return
+     */
+    private RouteDefinition gatewayRouteConvertToDefinition(GatewayRouteEntity gatewayRouteEntity) {
+        RouteDefinition routeDefinition = new RouteDefinition();
+        routeDefinition.setId(gatewayRouteEntity.getId());
+        String uri = gatewayRouteEntity.getUri();
+        URI u = URI.create(uri);
+        routeDefinition.setUri(u);
+        routeDefinition.setOrder(gatewayRouteEntity.getOrders());
+        ObjectMapper objectMapper = new ObjectMapper();
+        //将json抓换为类对象
+        try {
+            String filters = gatewayRouteEntity.getFilters();
+            if (StringUtils.isNotEmpty(filters)) {
+                TypeReference typeReference = new TypeReference<List<FilterDefinition>>() {
+                };
+                routeDefinition.setFilters(objectMapper.readValue(filters, typeReference));
+            }
+            String predicates = gatewayRouteEntity.getPredicates();
+            if (StringUtils.isNotEmpty(predicates)) {
+                TypeReference typeReference = new TypeReference<List<PredicateDefinition>>() {
+                };
+                routeDefinition.setPredicates(objectMapper.readValue(predicates, typeReference));
+            }
+        } catch (Exception e) {
+            log.error("GatewayRouteEntity转换异常RouteDefinition异常" + e.getMessage());
+        }
+        return routeDefinition;
     }
 
 }
