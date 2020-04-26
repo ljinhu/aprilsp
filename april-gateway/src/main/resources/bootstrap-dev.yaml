@@ -5,12 +5,13 @@ server:
 spring:
   rabbitmq:
     host: ${rabbit.host:127.0.0.1}
-    username: ${rabbit.userName:guest}
+    username: ${rabbit.username:guest}
     password: ${rabbit.password:guest}
     port: ${rabbit.port:5672}
   redis:
     host: ${redis.host:127.0.0.1}
     port: ${redis.port:6379}
+#    password: ${redis.password:root}
 jetcache:
   statIntervalMinutes: 15
   areaInCacheName: false
@@ -31,5 +32,6 @@ jetcache:
         minIdle: 5
         maxIdle: 20
         maxTotal: 50
-      host: ${redis.ip:127.0.0.1}
+      host: ${redis.host:127.0.0.1}
       port: ${redis.port:6379}
+#      password: ${redis.password:root}

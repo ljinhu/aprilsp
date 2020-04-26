@@ -11,8 +11,11 @@ spring:
   redis:
     host: ${redis.ip:172.32.150.55}
     port: ${redis.port:6379}
+#    password: ${redis.password:root}
   rabbitmq:
     host: ${rabbit.ip:172.32.150.55}
+    username: ${rabbit.username:guest}
+    password: ${rabbit.password:guest}
 jetcache:
   statIntervalMinutes: 15
   areaInCacheName: false
@@ -35,3 +38,4 @@ jetcache:
         maxTotal: 50
       host: ${redis.ip:172.32.150.55}
       port: ${redis.port:6379}
+#      password: ${redis.password:root}

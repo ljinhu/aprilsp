@@ -1,6 +1,8 @@
 package com.jimbolix.april.gateway.busEvent;
 
+import com.jimbolix.april.gateway.service.RoueService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 
 /**
@@ -10,8 +12,10 @@ import org.springframework.cloud.gateway.route.RouteDefinition;
  */
 @Slf4j
 public class EventConsumer {
-
+    @Autowired
+    private RoueService roueService;
     public void handleMessage(RouteDefinition routeDefinition){
         log.info("@@@@收到消息，route id 是{}",routeDefinition.getId());
+        roueService.save(routeDefinition);
     }
 }

@@ -34,7 +34,7 @@ public class RoueServiceImpl implements RoueService {
     private HashMap<String, RouteDefinition> routeDefinitionMap = new HashMap<>();
 
     @CreateCache(cacheType = CacheType.REMOTE, name = CacheKeysConstant.gateway_routes)
-    private Cache<String, RouteDefinition> routeDefinitionCache;
+    private Cache<String, RouteDefinition> gateWayRouteCache;
 
     @Override
     public boolean save(RouteDefinition routeDefinition) {
@@ -67,14 +67,14 @@ public class RoueServiceImpl implements RoueService {
     @PostConstruct
     public void loadRouteDefinitions() {
         log.info("@@@@网关服务开始加载路由@@@@");
-        Set<String> keys = stringRedisTemplate.keys(CacheKeysConstant.gateway_routes);
+        Set<String> keys = stringRedisTemplate.keys(CacheKeysConstant.gateway_routes+"*");
         if (CollectionUtils.isEmpty(keys)) {
             return;
         }
         log.info("@@@@预计初始化网关数据{}条@@@@", keys.size());
         keys = keys.stream().map(key -> key.replace(CacheKeysConstant.gateway_routes, ""))
                 .collect(Collectors.toSet());
-        Map<String, RouteDefinition> routeCaches = routeDefinitionCache.getAll(keys);
+        Map<String, RouteDefinition> routeCaches = gateWayRouteCache.getAll(keys);
 
         //jetcache将RouteDefinition返序列化后，uri发生变化，未初使化，导致路由异常，以下代码是重新初使化uri
         routeCaches.values().stream().forEach(routeDefinition -> {
