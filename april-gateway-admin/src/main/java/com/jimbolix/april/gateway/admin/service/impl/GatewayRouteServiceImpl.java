@@ -29,6 +29,9 @@ import com.jimbolix.april.gateway.admin.dao.GatewayRouteDao;
 import com.jimbolix.april.gateway.admin.entity.GatewayRouteEntity;
 import com.jimbolix.april.gateway.admin.service.GatewayRouteService;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+
+import javax.annotation.PostConstruct;
 
 @Slf4j
 @Service("gatewayRouteService")
@@ -95,4 +98,20 @@ public class GatewayRouteServiceImpl extends ServiceImpl<GatewayRouteDao, Gatewa
         return routeDefinition;
     }
 
+    /**
+     * 路由重新加载
+     */
+    @Override
+    @PostConstruct
+    public boolean overLoadRoute() {
+        List<GatewayRouteEntity> routeEntityList = this.list();
+
+        if (!CollectionUtils.isEmpty(routeEntityList)) {
+            routeEntityList.stream().forEach(gatewayRouteEntity ->
+                    gateWayRouteCache.PUT(gatewayRouteEntity.getRouteId(), gatewayRouteConvertToDefinition(gatewayRouteEntity))
+            );
+        }
+        log.info("路由重载成功，共{}条路由数据", routeEntityList.size());
+        return true;
+    }
 }

@@ -26,5 +26,7 @@ public interface GatewayRouteService extends IService<GatewayRouteEntity> {
      * @return
      */
     boolean add(GatewayRouteEntity gatewayRouteEntity);
+
+    boolean overLoadRoute();
 }
 
