@@ -6,8 +6,10 @@ import com.alicp.jetcache.anno.CreateCache;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jimbolix.april.common.constant.CacheKeysConstant;
+import com.jimbolix.april.gateway.admin.sender.BusSender;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.FilterDefinition;
 import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinition;
@@ -35,6 +37,9 @@ public class GatewayRouteServiceImpl extends ServiceImpl<GatewayRouteDao, Gatewa
     @CreateCache(cacheType = CacheType.REMOTE, name = CacheKeysConstant.gateway_routes)
     private Cache<String, RouteDefinition> gateWayRouteCache;
 
+    @Autowired
+    private BusSender busSender;
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<GatewayRouteEntity> page = this.page(
@@ -51,7 +56,7 @@ public class GatewayRouteServiceImpl extends ServiceImpl<GatewayRouteDao, Gatewa
         //放入缓存
         gateWayRouteCache.PUT(routeDefinition.getId(), routeDefinition);
         //todo 发送消息
-
+        busSender.send(routeDefinition);
         return this.save(gatewayRouteEntity);
     }
 
@@ -64,7 +69,7 @@ public class GatewayRouteServiceImpl extends ServiceImpl<GatewayRouteDao, Gatewa
      */
     private RouteDefinition gatewayRouteConvertToDefinition(GatewayRouteEntity gatewayRouteEntity) {
         RouteDefinition routeDefinition = new RouteDefinition();
-        routeDefinition.setId(gatewayRouteEntity.getId());
+        routeDefinition.setId(gatewayRouteEntity.getRouteId());
         String uri = gatewayRouteEntity.getUri();
         URI u = URI.create(uri);
         routeDefinition.setUri(u);

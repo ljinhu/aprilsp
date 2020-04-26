@@ -1,11 +1,35 @@
 server:
   port: 88
-spring:
-  cloud:
-    nacos:
-      discovery:
-        server-addr: ${nacos.ip:127.0.0.1}:${nacos.port:8848}
-      config:
-        server-addr: ${nacos.ip:127.0.0.1}:${nacos.port:8848}
   application:
     name: gateway
+spring:
+  rabbitmq:
+    host: ${rabbit.host:127.0.0.1}
+    username: ${rabbit.userName:guest}
+    password: ${rabbit.password:guest}
+    port: ${rabbit.port:5672}
+  redis:
+    host: ${redis.host:127.0.0.1}
+    port: ${redis.port:6379}
+jetcache:
+  statIntervalMinutes: 15
+  areaInCacheName: false
+  hidePackages: com.jimbolix.april
+  local:
+    # 默认2小时本地缓存
+    default:
+      type: caffeine
+      keyConvertor: fastjson
+  remote:
+    # 默认2小时的远程缓存
+    default:
+      type: redis
+      keyConvertor: fastjson
+      valueEncoder: kryo
+      valueDecoder: kryo
+      poolConfig:
+        minIdle: 5
+        maxIdle: 20
+        maxTotal: 50
+      host: ${redis.ip:127.0.0.1}
+      port: ${redis.port:6379}

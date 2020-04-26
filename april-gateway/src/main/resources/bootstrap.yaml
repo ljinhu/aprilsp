@@ -9,5 +9,6 @@ spring:
         server-addr: ${nacos.ip:127.0.0.1}:${nacos.port:8848}
       config:
         server-addr: ${nacos.ip:127.0.0.1}:${nacos.port:8848}
+        file-extension: yaml
 server:
   port: 88
