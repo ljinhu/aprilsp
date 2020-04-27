@@ -3,9 +3,6 @@ package com.jimbolix.april.gateway.admin.controller;
 import java.util.Arrays;
 import java.util.Map;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +22,6 @@ import com.jimbolix.april.common.utils.R;
  */
 @RestController
 @RequestMapping("april/gatewayroute")
-@ApiModel("动态网关管理")
 public class GatewayRouteController {
     @Autowired
     private GatewayRouteService gatewayRouteService;
@@ -34,9 +30,8 @@ public class GatewayRouteController {
     /**
      * 列表
      */
-    @ApiOperation("分页查询")
     @PostMapping("/list")
-    public R list(@ApiParam @RequestParam Map<String, Object> params) {
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = gatewayRouteService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -57,8 +52,7 @@ public class GatewayRouteController {
      * 保存
      */
     @RequestMapping("/save")
-    @ApiOperation("网关添加")
-    public R save(@ApiParam @RequestBody GatewayRouteEntity gatewayRoute) {
+    public R save( @RequestBody GatewayRouteEntity gatewayRoute) {
             gatewayRouteService.add(gatewayRoute);
         return R.ok();
     }
