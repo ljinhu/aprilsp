@@ -4,8 +4,10 @@ import java.util.Arrays;
 import java.util.Map;
 
 import com.jimbolix.april.gateway.admin.entity.GateWayRouteParam;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import com.jimbolix.april.gateway.admin.entity.GatewayRouteEntity;
@@ -23,14 +25,16 @@ import com.jimbolix.april.common.utils.R;
  */
 @RestController
 @RequestMapping("april/gatewayroute")
+@ApiModel("网关路由管理")
 public class GatewayRouteController {
     @Autowired
     private GatewayRouteService gatewayRouteService;
     /**
      * 列表
      */
+    @ApiOperation("网关列表")
     @PostMapping("/list")
-    public R list(@RequestParam Map<String, Object> params) {
+    public R list(@ApiParam @RequestParam Map<String, Object> params) {
         PageUtils page = gatewayRouteService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -40,8 +44,9 @@ public class GatewayRouteController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{id}")
-    public R info(@PathVariable("id") String id) {
+    @ApiOperation("路由详情")
+    @GetMapping("/info/{id}")
+    public R info(@ApiParam(required = true) @PathVariable("id") String id) {
             GatewayRouteEntity gatewayRoute = gatewayRouteService.getById(id);
 
         return R.ok().put("gatewayRoute", gatewayRoute);
