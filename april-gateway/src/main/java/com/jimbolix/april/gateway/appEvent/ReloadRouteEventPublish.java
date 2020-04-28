@@ -1,5 +1,6 @@
 package com.jimbolix.april.gateway.appEvent;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
  * @Description: 
  */
 @Component
+@Slf4j
 public class ReloadRouteEventPublish implements ApplicationEventPublisherAware {
 
     private ApplicationEventPublisher applicationEventPublisher;
@@ -21,6 +23,7 @@ public class ReloadRouteEventPublish implements ApplicationEventPublisherAware {
     }
 
     public void publishRouteChangeEvent(){
+        log.info("@@@@发布路由更新事件@@@@");
         this.applicationEventPublisher.publishEvent(new RefreshRoutesEvent(this));
     }
 }
