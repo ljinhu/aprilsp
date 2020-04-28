@@ -3,6 +3,7 @@ package com.jimbolix.april.gateway.admin.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.jimbolix.april.gateway.admin.entity.GateWayRouteParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,6 @@ import com.jimbolix.april.common.utils.R;
 public class GatewayRouteController {
     @Autowired
     private GatewayRouteService gatewayRouteService;
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
     /**
      * 列表
      */
@@ -52,8 +51,8 @@ public class GatewayRouteController {
      * 保存
      */
     @RequestMapping("/save")
-    public R save( @RequestBody GatewayRouteEntity gatewayRoute) {
-            gatewayRouteService.add(gatewayRoute);
+    public R save( @RequestBody GateWayRouteParam gatewayRoute) throws Exception {
+            gatewayRouteService.add(gatewayRoute.toPo());
         return R.ok();
     }
 
