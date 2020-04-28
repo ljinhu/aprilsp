@@ -11,6 +11,11 @@ spring:
   redis:
     host: ${redis.host:127.0.0.1}
     port: ${redis.port:6379}
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
 #    password: ${redis.password:root}
 jetcache:
   statIntervalMinutes: 15

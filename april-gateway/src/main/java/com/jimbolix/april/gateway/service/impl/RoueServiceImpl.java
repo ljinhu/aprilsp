@@ -58,6 +58,7 @@ public class RoueServiceImpl implements RoueService {
 
     @Override
     public Collection<RouteDefinition> getRouteDefinitions() {
+        log.info("@@@@RoueServiceImpl.getRouteDefinitions从缓存中加载路由信息@@@@");
         return routeDefinitionMap.values();
     }
 

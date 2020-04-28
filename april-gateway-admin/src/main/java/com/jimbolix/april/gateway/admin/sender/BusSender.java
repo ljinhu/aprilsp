@@ -31,7 +31,7 @@ public class BusSender {
     }
 
     public void send(RouteDefinition routeDefinition) {
-        log.info("@@@@发送消息[]@@@@", routeDefinition.getId());
+        log.info("@@@@发送消息{}@@@@", routeDefinition.getId());
         rabbitTemplate.convertAndSend(RabbitMqConstants.route_gateway_topic_exchange, "route_gateway_bingding.add", routeDefinition);
     }
 
