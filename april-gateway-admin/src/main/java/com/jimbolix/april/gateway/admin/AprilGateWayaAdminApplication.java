@@ -15,7 +15,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@MapperScan("com.jimbolix.april.gateway.admin.dao")
 @EnableCreateCacheAnnotation
 @EnableMethodCache(basePackages = "com.jimbolix.april")
 public class AprilGateWayaAdminApplication {

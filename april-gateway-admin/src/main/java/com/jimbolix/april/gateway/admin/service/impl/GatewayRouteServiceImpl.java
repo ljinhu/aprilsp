@@ -3,12 +3,15 @@ package com.jimbolix.april.gateway.admin.service.impl;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jimbolix.april.common.constant.CacheKeysConstant;
+import com.jimbolix.april.gateway.admin.entity.GateWayRouteParam;
 import com.jimbolix.april.gateway.admin.sender.BusSender;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.FilterDefinition;
 import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -48,7 +52,14 @@ public class GatewayRouteServiceImpl extends ServiceImpl<GatewayRouteDao, Gatewa
                 new Query<GatewayRouteEntity>().getPage(params),
                 new QueryWrapper<GatewayRouteEntity>()
         );
-        return new PageUtils(page);
+        IPage<GateWayRouteParam> paramIPage = new Page<>();
+        BeanUtils.copyProperties(page,paramIPage);
+        List<GatewayRouteEntity> records = page.getRecords();
+        if(!CollectionUtils.isEmpty(records)){
+            List<GateWayRouteParam> collect = records.stream().map(GatewayRouteEntity::toVo).collect(Collectors.toList());
+            paramIPage.setRecords(collect);
+        }
+        return new PageUtils(paramIPage);
     }
 
     @Transactional(rollbackFor = Exception.class)

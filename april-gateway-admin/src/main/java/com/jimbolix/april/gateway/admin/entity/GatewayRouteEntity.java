@@ -11,6 +11,7 @@ import java.util.List;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cloud.gateway.filter.FilterDefinition;
@@ -25,6 +26,7 @@ import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
  */
 @Data
 @TableName("gateway_route")
+@Slf4j
 public class GatewayRouteEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -78,20 +80,25 @@ public class GatewayRouteEntity implements Serializable {
      */
     private String updatedBy;
 
-    public GateWayRouteParam toVo()throws Exception{
+    public GateWayRouteParam toVo(){
         GateWayRouteParam param = new GateWayRouteParam();
         BeanUtils.copyProperties(this,param);
         ObjectMapper objectMapper = new ObjectMapper();
-        if(StringUtils.isNotEmpty(this.filters)){
-            TypeReference<List<FilterDefinition>> filterType = new TypeReference<List<FilterDefinition>>() {
-            };
-           param.setFilters(objectMapper.readValue(this.filters,filterType));
-        }
+        try {
+            if (StringUtils.isNotEmpty(this.filters)) {
+                TypeReference<List<FilterDefinition>> filterType = new TypeReference<List<FilterDefinition>>() {
+                };
+                param.setFilters(objectMapper.readValue(this.filters, filterType));
+            }
 
-        if(StringUtils.isNotEmpty(this.predicates)){
-            TypeReference<List<PredicateDefinition>> typeReference = new TypeReference<List<PredicateDefinition>>() {
-            };
-            param.setPredicates(objectMapper.readValue(this.predicates,typeReference));
+            if (StringUtils.isNotEmpty(this.predicates)) {
+                TypeReference<List<PredicateDefinition>> typeReference = new TypeReference<List<PredicateDefinition>>() {
+                };
+                param.setPredicates(objectMapper.readValue(this.predicates, typeReference));
+            }
+        }catch (Exception e){
+            log.error("@@@@数据转换异常@@@@");
+            log.error(e.getMessage());
         }
         return param;
     }
