@@ -51,6 +51,7 @@ public class RoueServiceImpl implements RoueService {
     public boolean delete(String id) {
         if (StringUtils.isNotEmpty(id)) {
             log.info("@@@@移除路由，id:{}", id);
+            gateWayRouteCache.remove(id);
             routeDefinitionMap.remove(id);
         }
         return true;

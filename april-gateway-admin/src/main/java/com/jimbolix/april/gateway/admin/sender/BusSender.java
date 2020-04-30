@@ -9,6 +9,8 @@ import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: ruihui.li
@@ -31,8 +33,13 @@ public class BusSender {
     }
 
     public void send(RouteDefinition routeDefinition) {
-        log.info("@@@@发送消息{}@@@@", routeDefinition.getId());
-        rabbitTemplate.convertAndSend(RabbitMqConstants.route_gateway_topic_exchange, "route_gateway_bingding.add", routeDefinition);
+        log.info("@@@@发送路由添加消息id是{}@@@@", routeDefinition.getId());
+        rabbitTemplate.convertAndSend(RabbitMqConstants.route_gateway_topic_exchange, "route_gateway_add_bingding.add", routeDefinition);
+    }
+
+    public void sendDelMessage(String routeId){
+        log.info("@@@@发送路由删除消息，id是{}@@@@",routeId);
+        rabbitTemplate.convertAndSend(RabbitMqConstants.route_gateway_topic_exchange,"route_gateway_del_bingding.del",routeId);
     }
 
 }

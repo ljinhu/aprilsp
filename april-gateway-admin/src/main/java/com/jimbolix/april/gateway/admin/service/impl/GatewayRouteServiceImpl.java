@@ -19,6 +19,8 @@ import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -53,9 +55,9 @@ public class GatewayRouteServiceImpl extends ServiceImpl<GatewayRouteDao, Gatewa
                 new QueryWrapper<GatewayRouteEntity>()
         );
         IPage<GateWayRouteParam> paramIPage = new Page<>();
-        BeanUtils.copyProperties(page,paramIPage);
+        BeanUtils.copyProperties(page, paramIPage);
         List<GatewayRouteEntity> records = page.getRecords();
-        if(!CollectionUtils.isEmpty(records)){
+        if (!CollectionUtils.isEmpty(records)) {
             List<GateWayRouteParam> collect = records.stream().map(GatewayRouteEntity::toVo).collect(Collectors.toList());
             paramIPage.setRecords(collect);
         }
@@ -123,5 +125,19 @@ public class GatewayRouteServiceImpl extends ServiceImpl<GatewayRouteDao, Gatewa
         }
         log.info("路由重载成功，共{}条路由数据", routeEntityList.size());
         return true;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public boolean deleteByIds(String[] ids) {
+        //先查询所有信息，根据routeid删除缓存并通知gateway更新路由
+        Collection<GatewayRouteEntity> gatewayRouteEntities = this.listByIds(Arrays.asList(ids));
+        if (!CollectionUtils.isEmpty(gatewayRouteEntities)) {
+            gatewayRouteEntities.forEach(gatewayRouteEntity ->
+                    busSender.sendDelMessage(gatewayRouteEntity.getRouteId())
+            );
+        }
+        boolean b = this.removeByIds(Arrays.asList(ids));
+        return b;
     }
 }

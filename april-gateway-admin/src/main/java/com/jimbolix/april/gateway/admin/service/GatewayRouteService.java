@@ -28,5 +28,12 @@ public interface GatewayRouteService extends IService<GatewayRouteEntity> {
     boolean add(GatewayRouteEntity gatewayRouteEntity);
 
     boolean overLoadRoute();
+
+    /**
+     * 根据id删除
+     * @param ids
+     * @return
+     */
+    boolean deleteByIds(String[] ids);
 }
 

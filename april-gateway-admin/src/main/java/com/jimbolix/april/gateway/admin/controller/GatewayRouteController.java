@@ -13,6 +13,7 @@ import com.jimbolix.april.common.utils.PageUtils;
 import com.jimbolix.april.common.utils.R;
 
 
+
 /**
  * 网关路由表
  *
@@ -68,9 +69,9 @@ public class GatewayRouteController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @PostMapping("/delete")
     public R delete(@RequestBody String[] ids) {
-            gatewayRouteService.removeByIds(Arrays.asList(ids));
+            gatewayRouteService.deleteByIds(ids);
 
         return R.ok();
     }
