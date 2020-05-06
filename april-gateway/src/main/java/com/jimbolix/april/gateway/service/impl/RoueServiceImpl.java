@@ -1,5 +1,6 @@
 package com.jimbolix.april.gateway.service.impl;
 
+import com.alibaba.cloud.nacos.registry.NacosRegistration;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
@@ -8,6 +9,9 @@ import com.jimbolix.april.gateway.service.RoueService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.cloud.client.serviceregistry.Registration;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
