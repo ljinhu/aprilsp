@@ -43,9 +43,11 @@ spring:
     nacos:
       discovery:
         server-addr: ${nacos.host:localhost}:${nacos.port:8848}
+        namespace: c8451063-573d-4397-bb1d-f929c1dad086
       config:
         server-addr: ${nacos.host:localhost}:${nacos.port:8848}
         file-extension: yaml
+        namespace: c8451063-573d-4397-bb1d-f929c1dad086
 #  resources:
 #    add-mappings: false
 

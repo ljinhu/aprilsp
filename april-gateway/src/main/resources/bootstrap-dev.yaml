@@ -1,5 +1,5 @@
 server:
-  port: 88
+  port: ${port:88}
   application:
     name: gateway
 spring:

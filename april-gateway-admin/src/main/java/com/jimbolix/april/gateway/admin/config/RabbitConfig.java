@@ -34,43 +34,4 @@ public class RabbitConfig {
         Jackson2JsonMessageConverter converter = new Jackson2JsonMessageConverter(objectMapper);
         return new ContentTypeDelegatingMessageConverter(converter);
     }
-
-    @Bean
-    Queue queue() {
-        log.info("@@@@@声明网关路由的消息队列，队列名称{}@@@@", RabbitMqConstants.route_gateway_add_queue_name);
-        Queue queue = new Queue(RabbitMqConstants.route_gateway_add_queue_name, false);
-        return queue;
-    }
-
-    @Bean
-    TopicExchange topicExchange() {
-        log.info("@@@@声明网关消息的交换机，{}@@@@", RabbitMqConstants.route_gateway_topic_exchange);
-        TopicExchange topicExchange = new TopicExchange(RabbitMqConstants.route_gateway_topic_exchange);
-        return topicExchange;
-    }
-
-    @Bean
-    Binding binding(Queue queue , TopicExchange topicExchange) {
-        log.info("@@@@声明网关消息的绑定,{}@@@@", RabbitMqConstants.route_gateway_add_bingding_key);
-        Binding binding = BindingBuilder.bind(queue).to(topicExchange).with(RabbitMqConstants.route_gateway_add_bingding_key);
-
-        return binding;
-    }
-
-    /**
-     * 删除的消息队列
-     * @return
-     */
-    @Bean
-    Queue delQueue(){
-        log.info("@@@@声明路由删除消息队列@@@@");
-        Queue queue = new Queue(RabbitMqConstants.route_gateway_del_queue_name,false);
-        return queue;
-    }
-
-    @Bean
-    Binding delBinding(@Qualifier("delQueue") Queue delQueue, TopicExchange topicExchange){
-        Binding binding = BindingBuilder.bind(delQueue).to(topicExchange).with(RabbitMqConstants.route_gateway_del_bingding_key);
-        return binding;
-    }
 }

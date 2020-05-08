@@ -7,8 +7,10 @@ spring:
     nacos:
       discovery:
         server-addr: ${nacos.ip:127.0.0.1}:${nacos.port:8848}
+#        namespace: c8451063-573d-4397-bb1d-f929c1dad086
       config:
         server-addr: ${nacos.ip:127.0.0.1}:${nacos.port:8848}
         file-extension: yaml
+#        namespace: c8451063-573d-4397-bb1d-f929c1dad086
 server:
   port: 88
