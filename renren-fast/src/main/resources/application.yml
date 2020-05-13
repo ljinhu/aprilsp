@@ -4,7 +4,7 @@ server:
     uri-encoding: UTF-8
     max-threads: 1000
     min-spare-threads: 30
-  port: 8080
+  port: ${server_port:8080}
   connection-timeout: 5000ms
   servlet:
     context-path: /renren-fast
@@ -39,13 +39,6 @@ spring:
     throw-exception-if-no-handler-found: true
   application:
     name: renren-fast
-  cloud:
-    nacos:
-      discovery:
-        server-addr: ${nacos.host:localhost}:${nacos.port:8848}
-      config:
-        server-addr: ${nacos.host:localhost}:${nacos.port:8848}
-        file-extension: yaml
 #  resources:
 #    add-mappings: false
 

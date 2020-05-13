@@ -343,7 +343,7 @@
                             "hash": {},
                             "data": data
                         })) != null ? stack1 : "")
-                        + "\" data-sw-translate>Terms of service</a></div>";
+                        + "\" data-sw-translate>Terms of oauth2</a></div>";
                 }, "6": function (container, depth0, helpers, partials, data) {
                     var stack1;
 

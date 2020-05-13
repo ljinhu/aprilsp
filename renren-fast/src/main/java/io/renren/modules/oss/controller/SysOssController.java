@@ -62,12 +62,12 @@ public class SysOssController {
     /**
      * 云存储配置信息
      */
-    @GetMapping("/config")
+    @GetMapping("/com.jimbolix.april.authorization.config")
     @RequiresPermissions("sys:oss:all")
     public R config() {
         CloudStorageConfig config = sysConfigService.getConfigObject(KEY, CloudStorageConfig.class);
 
-        return R.ok().put("config", config);
+        return R.ok().put("com.jimbolix.april.authorization.config", config);
     }
 
 

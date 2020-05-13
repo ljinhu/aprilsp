@@ -27,7 +27,7 @@ import java.util.Map;
  * @author Mark sunlightcs@gmail.com
  */
 @RestController
-@RequestMapping("/sys/config")
+@RequestMapping("/sys/com.jimbolix.april.authorization.config")
 public class SysConfigController extends AbstractController {
     @Autowired
     private SysConfigService sysConfigService;
@@ -36,7 +36,7 @@ public class SysConfigController extends AbstractController {
      * 所有配置列表
      */
     @GetMapping("/list")
-    @RequiresPermissions("sys:config:list")
+    @RequiresPermissions("sys:com.jimbolix.april.authorization.config:list")
     public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = sysConfigService.queryPage(params);
 
@@ -48,11 +48,11 @@ public class SysConfigController extends AbstractController {
      * 配置信息
      */
     @GetMapping("/info/{id}")
-    @RequiresPermissions("sys:config:info")
+    @RequiresPermissions("sys:com.jimbolix.april.authorization.config:info")
     public R info(@PathVariable("id") Long id) {
         SysConfigEntity config = sysConfigService.getById(id);
 
-        return R.ok().put("config", config);
+        return R.ok().put("com.jimbolix.april.authorization.config", config);
     }
 
     /**
@@ -60,7 +60,7 @@ public class SysConfigController extends AbstractController {
      */
     @SysLog("保存配置")
     @PostMapping("/save")
-    @RequiresPermissions("sys:config:save")
+    @RequiresPermissions("sys:com.jimbolix.april.authorization.config:save")
     public R save(@RequestBody SysConfigEntity config) {
         ValidatorUtils.validateEntity(config);
 
@@ -74,7 +74,7 @@ public class SysConfigController extends AbstractController {
      */
     @SysLog("修改配置")
     @PostMapping("/update")
-    @RequiresPermissions("sys:config:update")
+    @RequiresPermissions("sys:com.jimbolix.april.authorization.config:update")
     public R update(@RequestBody SysConfigEntity config) {
         ValidatorUtils.validateEntity(config);
 
@@ -88,7 +88,7 @@ public class SysConfigController extends AbstractController {
      */
     @SysLog("删除配置")
     @PostMapping("/delete")
-    @RequiresPermissions("sys:config:delete")
+    @RequiresPermissions("sys:com.jimbolix.april.authorization.config:delete")
     public R delete(@RequestBody Long[] ids) {
         sysConfigService.deleteBatch(ids);
 

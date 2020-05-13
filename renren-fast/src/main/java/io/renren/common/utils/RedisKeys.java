@@ -16,6 +16,6 @@ package io.renren.common.utils;
 public class RedisKeys {
 
     public static String getSysConfigKey(String key) {
-        return "sys:config:" + key;
+        return "sys:com.jimbolix.april.authorization.config:" + key;
     }
 }

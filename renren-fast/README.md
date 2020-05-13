@@ -31,7 +31,7 @@ renren-fast
 │  ├─validator 后台校验
 │  └─xss XSS过滤
 │ 
-├─config 配置信息
+├─com.jimbolix.april.authorization.config 配置信息
 │ 
 ├─modules 功能模块
 │  ├─app API接口模块(APP调用)

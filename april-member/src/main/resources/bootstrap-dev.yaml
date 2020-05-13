@@ -6,6 +6,15 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   application:
     name: gulimall-member
+  rabbitmq:
+    host: ${rabbit.host:127.0.0.1}
+    username: ${rabbit.username:guest}
+    password: ${rabbit.password:guest}
+    port: ${rabbit.port:5672}
+  redis:
+    host: ${redis.host:127.0.0.1}
+    port: ${redis.port:6379}
+  #    password: ${redis.password:root}
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
@@ -21,4 +30,27 @@ ribbon:
 logging:
   level:
     #feign日志以什么级别监控哪个接口
-     com.jimbolix.april.common.feign.CouponFeignService: debug
+    com.jimbolix.april.common.feign.CouponFeignService: debug
+jetcache:
+  statIntervalMinutes: 15
+  areaInCacheName: false
+  hidePackages: com.jimbolix.april
+  local:
+    # 默认2小时本地缓存
+    default:
+      type: caffeine
+      keyConvertor: fastjson
+  remote:
+    # 默认2小时的远程缓存
+    default:
+      type: redis
+      keyConvertor: fastjson
+      valueEncoder: kryo
+      valueDecoder: kryo
+      poolConfig:
+        minIdle: 5
+        maxIdle: 20
+        maxTotal: 50
+      host: ${redis.host:127.0.0.1}
+      port: ${redis.port:6379}
+#      password: ${redis.password:root}

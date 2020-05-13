@@ -1,5 +1,6 @@
 package com.jimbolix.april.member;
 
+import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -15,6 +16,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients(basePackages = "com.jimbolix.april.common.feign")
 @EnableDiscoveryClient
 @SpringBootApplication
+@EnableCreateCacheAnnotation
 public class AprilMemberApplication {
 
     public static void main(String[] args) {
