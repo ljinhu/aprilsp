@@ -24,6 +24,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,6 +45,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
     private SysUserRoleService sysUserRoleService;
     @Autowired
     private SysRoleService sysRoleService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -80,9 +83,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
     public void saveUser(SysUserEntity user) {
         user.setCreateTime(new Date());
         //sha256加密
-        String salt = RandomStringUtils.randomAlphanumeric(20);
-        user.setPassword(new Sha256Hash(user.getPassword(), salt).toHex());
-        user.setSalt(salt);
+//        String salt = RandomStringUtils.randomAlphanumeric(20);
+//        user.setPassword(new Sha256Hash(user.getPassword(), salt).toHex());
+//        user.setSalt(salt);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         this.save(user);
 
         //检查角色是否越权

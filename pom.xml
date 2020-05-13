@@ -20,6 +20,7 @@
 		<module>renren-generator</module>
 		<module>april-common</module>
         <module>april-gateway-admin</module>
+		<module>security-manager</module>
     </modules>
 
 </project>

@@ -72,15 +72,15 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.jdbc(dataSource);
-        clients.withClientDetails(clientDetailsService());
+//        clients.withClientDetails(clientDetailsService());
     }
 
-    @Bean(name = "clientDetails")
-    public ClientDetailsService clientDetailsService(){
-        JdbcClientDetailsService jdbcClientDetailsService = new JdbcClientDetailsService(dataSource);
-        jdbcClientDetailsService.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
-        return jdbcClientDetailsService;
-    }
+//    @Bean(name = "clientDetails")
+//    public ClientDetailsService clientDetailsService(){
+//        JdbcClientDetailsService jdbcClientDetailsService = new JdbcClientDetailsService(dataSource);
+//        jdbcClientDetailsService.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+//        return jdbcClientDetailsService;
+//    }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {

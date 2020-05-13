@@ -8,7 +8,6 @@
 
 package io.renren;
 
-import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
 import io.renren.common.utils.IPUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +16,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-@EnableCreateCacheAnnotation
 public class RenrenApplication {
 
     public static void main(String[] args) {

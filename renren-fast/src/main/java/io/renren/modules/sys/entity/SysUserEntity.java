@@ -87,4 +87,26 @@ public class SysUserEntity implements Serializable {
      */
     private Date createTime;
 
+    /**
+     * 账号是否有效
+     */
+    private Boolean enabled;
+
+    /**
+     * 账号是否未过期
+     */
+    @TableField("account_non_expired")
+    private Boolean accountNonExpired;
+
+    /**
+     * 密码是否未过期
+     */
+    @TableField("credentials_non_expired")
+    private Boolean credentialsNonExpired;
+
+    /**
+     * 账号是否未锁定
+     */
+    @TableField("account_non_locked")
+    private Boolean accountNonLocked;
 }
