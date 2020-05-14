@@ -28,7 +28,7 @@ import java.util.Map;
  *
  * @author Mark sunlightcs@gmail.com
  */
-@Configuration
+//@Configuration
 public class ShiroConfig {
 
     @Bean("securityManager")

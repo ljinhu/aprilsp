@@ -6,13 +6,11 @@
  * 版权所有，侵权必究！
  */
 
-package io.renren.modules.sys.entity;
+package com.jimbolix.april.authorization.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.renren.common.validator.group.AddGroup;
-import io.renren.common.validator.group.UpdateGroup;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
@@ -22,31 +20,21 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 系统用户
+ * 用户信息
  *
- * @author Mark sunlightcs@gmail.com
  */
 @Data
-@TableName("sys_user")
-public class SysUserEntity implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class UserInfo implements Serializable {
 
-    /**
-     * 用户ID
-     */
-    @TableId
-    private Long userId;
-
+    private String uniqueAccount;
     /**
      * 用户名
      */
-    @NotBlank(message = "用户名不能为空", groups = {AddGroup.class, UpdateGroup.class})
     private String username;
 
     /**
      * 密码
      */
-    @NotBlank(message = "密码不能为空", groups = AddGroup.class)
     private String password;
 
     /**
@@ -57,8 +45,6 @@ public class SysUserEntity implements Serializable {
     /**
      * 邮箱
      */
-    @NotBlank(message = "邮箱不能为空", groups = {AddGroup.class, UpdateGroup.class})
-    @Email(message = "邮箱格式不正确", groups = {AddGroup.class, UpdateGroup.class})
     private String email;
 
     /**
@@ -109,7 +95,4 @@ public class SysUserEntity implements Serializable {
      */
     @TableField("account_non_locked")
     private Boolean accountNonLocked;
-
-    @TableField("unique_account")
-    private String uniqueAccount;
 }

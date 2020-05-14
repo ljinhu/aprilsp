@@ -8,6 +8,7 @@
 
 package io.renren.modules.sys.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -124,6 +125,14 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
         userEntity.setPassword(newPassword);
         return this.update(userEntity,
                 new QueryWrapper<SysUserEntity>().eq("user_id", userId).eq("password", password));
+    }
+
+    @Override
+    public SysUserEntity queryByuniqueAccount(String uniqueAccount) {
+        QueryWrapper<SysUserEntity> wrapper = new QueryWrapper<>();
+        wrapper.eq("unique_account",uniqueAccount);
+        SysUserEntity entity = this.getOne(wrapper);
+        return entity;
     }
 
     /**
