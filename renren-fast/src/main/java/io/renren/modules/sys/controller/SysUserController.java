@@ -103,10 +103,17 @@ public class SysUserController extends AbstractController {
         return R.ok().put("user", user);
     }
 
-//    @GetMapping("/info")
-//    public R info(@RequestParam("uniqueId") String uniqueId){
-//
-//    }
+    @GetMapping("/user/{uniqueAccount}")
+    public SysUserEntity user(@PathVariable("uniqueAccount") String uniqueAccount) {
+        SysUserEntity user = sysUserService.queryByuniqueAccount(uniqueAccount);
+
+        //获取用户所属的角色列表
+        List<Long> roleIdList = sysUserRoleService.queryRoleIdList(user.getUserId());
+        user.setRoleIdList(roleIdList);
+
+        return user;
+    }
+
 
     /**
      * 保存用户

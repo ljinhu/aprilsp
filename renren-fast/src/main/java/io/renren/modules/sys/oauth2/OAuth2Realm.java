@@ -26,7 +26,7 @@ import java.util.Set;
  *
  * @author Mark sunlightcs@gmail.com
  */
-@Component
+//@Component
 public class OAuth2Realm extends AuthorizingRealm {
     @Autowired
     private ShiroService shiroService;
