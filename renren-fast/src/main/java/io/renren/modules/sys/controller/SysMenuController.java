@@ -188,4 +188,9 @@ public class SysMenuController extends AbstractController {
             return;
         }
     }
+
+    @GetMapping("/userMenu/{userAccount}")
+    public List<SysMenuEntity> getUserMenuList(@PathVariable("userAccount") String userAccount){
+        return sysMenuService.getUserMenuList(userAccount);
+    }
 }

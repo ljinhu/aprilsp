@@ -47,6 +47,8 @@ public interface SysMenuService extends IService<SysMenuEntity> {
      */
     List<SysMenuEntity> getUserMenuList(Long userId);
 
+    List<SysMenuEntity> getUserMenuList(String userAoount);
+
     /**
      * 删除
      */

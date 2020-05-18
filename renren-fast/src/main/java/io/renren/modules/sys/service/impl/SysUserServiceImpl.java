@@ -84,10 +84,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
     public void saveUser(SysUserEntity user) {
         user.setCreateTime(new Date());
         //sha256加密
-//        String salt = RandomStringUtils.randomAlphanumeric(20);
-//        user.setPassword(new Sha256Hash(user.getPassword(), salt).toHex());
-//        user.setSalt(salt);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        String salt = RandomStringUtils.randomAlphanumeric(20);
+        user.setPassword(new Sha256Hash(user.getPassword(), salt).toHex());
+        user.setSalt(salt);
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
         this.save(user);
 
         //检查角色是否越权

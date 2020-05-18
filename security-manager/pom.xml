@@ -13,22 +13,13 @@
     <packaging>pom</packaging>
     <modules>
         <module>authorizationserver</module>
+        <module>authenticationserver</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
-            <version>[2.2.4,)</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-jwt</artifactId>
-            <version>RELEASE</version>
-        </dependency>
         <dependency>
             <groupId>com.jimbolix.cloud</groupId>
             <artifactId>april-common</artifactId>

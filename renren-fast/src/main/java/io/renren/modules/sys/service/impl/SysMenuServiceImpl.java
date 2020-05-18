@@ -9,11 +9,13 @@
 package io.renren.modules.sys.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.renren.common.utils.Constant;
 import io.renren.common.utils.MapUtils;
 import io.renren.modules.sys.dao.SysMenuDao;
 import io.renren.modules.sys.entity.SysMenuEntity;
+import io.renren.modules.sys.entity.SysUserEntity;
 import io.renren.modules.sys.service.SysMenuService;
 import io.renren.modules.sys.service.SysRoleMenuService;
 import io.renren.modules.sys.service.SysUserService;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service("sysMenuService")
@@ -67,6 +70,19 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuEntity> i
         //用户菜单列表
         List<Long> menuIdList = sysUserService.queryAllMenuId(userId);
         return getAllMenuList(menuIdList);
+    }
+
+    @Override
+    public List<SysMenuEntity> getUserMenuList(String userAoount) {
+        List<SysMenuEntity> userMenuList = new ArrayList<>();
+        userAoount = Optional.ofNullable(userAoount).orElse("-1");
+        QueryWrapper<SysUserEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("unique_account",userAoount);
+        SysUserEntity userEntity = sysUserService.getOne(queryWrapper);
+        if(userEntity != null){
+            userMenuList = this.getUserMenuList(userEntity.getUserId());
+        }
+        return userMenuList;
     }
 
     @Override

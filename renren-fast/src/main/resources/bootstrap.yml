@@ -6,8 +6,8 @@ server:
     min-spare-threads: 30
   port: 8080
   connection-timeout: 5000ms
-#  servlet:
-#    context-path: /renren-fast
+  servlet:
+    context-path: /renren-fast
 
 spring:
   # 环境 dev|test|prod
@@ -85,3 +85,6 @@ renren:
     # token有效时长，7天，单位秒
     expire: 604800
     header: token
+shiro:
+  security:
+    enabled: ${shiro.security.enabled:true}

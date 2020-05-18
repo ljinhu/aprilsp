@@ -38,7 +38,7 @@ import java.util.Arrays;
 @EnableAuthorizationServer
 public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
-    @Value("spring.security.oauth2.jwt.signingKey")
+    @Value("${spring.security.oauth2.jwt.signingKey}")
     private String signingKey;
 
     @Autowired
@@ -99,6 +99,9 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
+
+
+
         jwtAccessTokenConverter.setSigningKey(signingKey);
         return jwtAccessTokenConverter;
     }
