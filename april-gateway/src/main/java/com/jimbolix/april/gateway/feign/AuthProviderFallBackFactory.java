@@ -3,6 +3,7 @@ package com.jimbolix.april.gateway.feign;
 import com.jimbolix.april.common.utils.R;
 import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 /**
  * @Author: ruihui.li
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
  * @Description: 用于抓取异常的容错处理类
  */
 @Slf4j
+@Component
 public class AuthProviderFallBackFactory implements FallbackFactory<AuthProvider> {
 
     @Override

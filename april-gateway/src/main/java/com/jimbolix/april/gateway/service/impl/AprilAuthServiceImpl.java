@@ -51,10 +51,12 @@ public class AprilAuthServiceImpl implements AprilAuthService {
     public boolean hasPermission(String authentication, String url, String method) {
         //首先判断是否有token
         if (StringUtils.isEmpty(authentication) || !authentication.startsWith(BEARER)) {
+            log.error("@@@@未携带token@@@@");
             return false;
         }
         //验证token是否失效
         if (this.invalidJwtAccessToken(authentication)) {
+            log.error("@@@@token失效@@@@");
             return false;
         }
         return hasPermission(authProvider.decide(authentication, url, method));

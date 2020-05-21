@@ -42,10 +42,10 @@ jetcache:
   #      password: ${redis.password:root}
 logging:
   level:
-     com.jimbolix.april.gateway.feign.AuthProvider: info:
+     com.jimbolix.april.gateway.feign.AuthProvider: info
 ribbon:
   #获取可用资源的超时时间
-  ReadTimeout: 4000
+  ReadTimeout: 6000
   #建立连接的超时时间
   ConnectTimeout: 1000
 feign:
