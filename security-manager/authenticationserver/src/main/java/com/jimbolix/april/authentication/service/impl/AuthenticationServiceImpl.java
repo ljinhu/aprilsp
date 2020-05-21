@@ -33,9 +33,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         log.info("@@@@请求的地址是｛｝，方法是｛｝@@@@",servletPath,method);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         ConfigAttribute configAttribute = resources.findConfigAttributesByUrl(authRequest);
-        //系统资源中无指定资源则直接返回false
+        //系统资源中无指定资源则直接返回false,业务变更，需要保护的资源全都需要配置到资源池中，否则放行
         if(StringUtils.equals(NONEXISTENT_URL,configAttribute.getAttribute())){
-            return false;
+            return true;
         }
         //获取用户所有资源
         List<SysMenuEntity> resources = this.resources.findResourcesByUserAccont(authentication.getName());
