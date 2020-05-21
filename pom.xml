@@ -21,6 +21,7 @@
 		<module>april-common</module>
         <module>april-gateway-admin</module>
 		<module>security-manager</module>
+		<module>april-third-party</module>
     </modules>
 	<plugins>
 		<plugin>

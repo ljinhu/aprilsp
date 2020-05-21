@@ -20,16 +20,16 @@
             <groupId>com.jimbolix.cloud</groupId>
             <artifactId>april-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<groupId>io.springfox</groupId>-->
-                    <!--<artifactId>springfox-swagger2</artifactId>-->
-                <!--</exclusion>-->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
                 <!--<exclusion>-->
                     <!--<groupId>io.springfox</groupId>-->
                     <!--<artifactId>springfox-swagger-ui</artifactId>-->
                 <!--</exclusion>-->
-            <!--</exclusions>-->
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

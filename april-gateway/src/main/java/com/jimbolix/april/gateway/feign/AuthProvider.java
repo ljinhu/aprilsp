@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Author liruihui
  * @date 2020.05.17 14:50
  */
-@FeignClient(name = "authenticationserver")
+@FeignClient(name = "authenticationserver",fallbackFactory = AuthProviderFallBackFactory.class)
 public interface AuthProvider {
 
     @PostMapping(value = "/auth/permission")

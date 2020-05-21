@@ -17,3 +17,12 @@ spring:
     oauth2:
       jwt:
         signingKey: ${spring.security.oauth2.jwt.signingKey:12345}
+feign:
+  hystrix:
+    enabled: true
+ribbon:
+  ReadTimeout: 4000
+  ConnectTimeout: 1000
+logging:
+  level:
+    com.jimbolix.april.authentication.feign.ResourceProvider: info

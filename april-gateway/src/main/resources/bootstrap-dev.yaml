@@ -39,4 +39,15 @@ jetcache:
         maxTotal: 50
       host: ${redis.host:127.0.0.1}
       port: ${redis.port:6379}
-#      password: ${redis.password:root}
+  #      password: ${redis.password:root}
+logging:
+  level:
+     com.jimbolix.april.gateway.feign.AuthProvider: info:
+ribbon:
+  #获取可用资源的超时时间
+  ReadTimeout: 4000
+  #建立连接的超时时间
+  ConnectTimeout: 1000
+feign:
+  hystrix:
+    enabled: true #feign开启hystrix支持

@@ -8,8 +8,8 @@
         <version>2.2.1.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.atguigu.gulimall</groupId>
-    <artifactId>gulimall-third-party</artifactId>
+    <groupId>com.jimbolix.cloud</groupId>
+    <artifactId>april-third-party</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>gulimall-third-party</name>
     <description>第三方服务</description>
@@ -21,8 +21,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.atguigu.gulimall</groupId>
-            <artifactId>gulimall-common</artifactId>
+            <artifactId>april</artifactId>
+            <groupId>com.jimbolix.cloud</groupId>
             <version>0.0.1-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
