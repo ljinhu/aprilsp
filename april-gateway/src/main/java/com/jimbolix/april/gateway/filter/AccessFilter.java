@@ -1,4 +1,4 @@
-package com.jimbolix.april.gateway;
+package com.jimbolix.april.gateway.filter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
