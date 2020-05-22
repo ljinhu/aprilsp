@@ -14,7 +14,7 @@ import springfox.documentation.service.OAuth;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@JsonSerialize()
+@JsonSerialize(using = AprilOauthExceptionSerilizer.class)
 public class AprilOauthException extends OAuth2Exception {
 
     private R r;
