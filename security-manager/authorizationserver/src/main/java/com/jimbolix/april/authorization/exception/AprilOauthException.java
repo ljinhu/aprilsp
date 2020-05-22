@@ -5,7 +5,6 @@ import com.jimbolix.april.common.utils.R;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
-import springfox.documentation.service.OAuth;
 
 /**
  * @Author: ruihui.li
