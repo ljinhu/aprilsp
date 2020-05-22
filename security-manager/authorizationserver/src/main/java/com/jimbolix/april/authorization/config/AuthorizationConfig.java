@@ -1,6 +1,7 @@
 package com.jimbolix.april.authorization.config;
 
 import com.jimbolix.april.authorization.enhancher.AprilTokenEnhancer;
+import com.jimbolix.april.authorization.oauth2.AprilResponseExceptionTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +21,7 @@ import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -87,7 +89,7 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
         endpoints.accessTokenConverter(accessTokenConverter()).
                 tokenStore(tokenStore()).authorizationCodeServices(authorizationCodeServices())
                 .approvalStore(approvalStore()).authenticationManager(authenticationManager).tokenEnhancer(tokenEnhancerChain())
-                .userDetailsService(userDetailsService);
+                .userDetailsService(userDetailsService).exceptionTranslator(webResponseExceptionTranslator());
 
     }
 
@@ -99,7 +101,6 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
-
 
 
         jwtAccessTokenConverter.setSigningKey(signingKey);
@@ -126,5 +127,10 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
         tokenEnhancerChain.setTokenEnhancers(Arrays.asList(new AprilTokenEnhancer(), accessTokenConverter()));
         return tokenEnhancerChain;
+    }
+
+    @Bean
+    public WebResponseExceptionTranslator webResponseExceptionTranslator() {
+        return new AprilResponseExceptionTranslator();
     }
 }
