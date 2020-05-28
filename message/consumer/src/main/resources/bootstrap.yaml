@@ -1,0 +1,38 @@
+server:
+  port: ${serverport:10001}
+spring:
+  rabbitmq:
+    host: 172.32.150.55
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.32.150.55:8848
+      config:
+        server-addr: 172.32.150.55:8848
+        file-extension: yaml
+  application:
+    name: consumer
+feign:
+  hystrix:
+    enabled: true
+ribbon:
+  ReadTimeout: 8000
+  ConnectTimeout: 1000
+hystrix:
+  command:
+    #配置服务降级全局超时时间
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000
+        timeout:
+          enabled: false #开启hystrix,为false将超时控制交给ribbon,上面的timeoutInMilliseconds失效
+  threadpool:
+    default:
+      #默认为10,基本得原则时保持线程池尽可能小，他主要是为了释放压力，防止资源被阻塞
+      coreSize: 20
+      maxQueueSize: 60
