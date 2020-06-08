@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jibolix.message.april.consumer.event.MessageConsumer;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.amqp.support.converter.ContentTypeDelegatingMessageConverter;
@@ -43,16 +44,16 @@ public class RabbitConfig {
         listenerAdapter.setMessageConverter(messageConverter());
         listenerAdapter.setDelegate(messageConsumer());
         Map<String, String> queueOrTagToMethodNameMap = new HashMap<String, String>();
+        queueOrTagToMethodNameMap.put("april_message","consumerString");
         listenerAdapter.setQueueOrTagToMethodName(queueOrTagToMethodNameMap);
         return listenerAdapter;
     }
 
     @Bean
-    public SimpleMessageListenerContainer simpleMessageListenerContainer(){
-        SimpleMessageListenerContainer listenerContainer = new SimpleMessageListenerContainer();
-        listenerContainer.setConcurrentConsumers(1);
+    public SimpleMessageListenerContainer simpleMessageListenerContainer(ConnectionFactory connectionFactory){
+        SimpleMessageListenerContainer listenerContainer = new SimpleMessageListenerContainer(connectionFactory);
         listenerContainer.setMessageListener(messageListenerAdapter());
-        listenerContainer.setQueueNames("");
+        listenerContainer.setQueueNames("april_message");
         return listenerContainer;
     }
 }

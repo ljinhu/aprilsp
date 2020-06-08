@@ -22,6 +22,7 @@
         <module>april-gateway-admin</module>
 		<module>security-manager</module>
 		<module>april-third-party</module>
+        <module>message</module>
     </modules>
 	<plugins>
 		<plugin>
